@@ -36,12 +36,12 @@ Par exemple, les 100 premières interactions protéine-protéine humaines dispon
 
 Numero de champ | Signification Biologique|
  --- | --- 
-1 | 
-2 |
-3 |
-4 |
-5 |
-6 |
+1 | Unique identifier for interactor A
+2 | Unique identifier for interactor B
+3 | Alternative identifier for interactor A
+4 | Alternative identifier for interactor B
+5 | Aliases for A
+6 | Aliases for B
 
 ##### Utiliser le PMID de la publication pour récuperer les lignes MITAB des interactions rapportées dans l'étude.
 Une librairie pratique pour manipuler des requêtes HTTP est [requests](https://requests.readthedocs.io/en/master/), eg:
@@ -60,6 +60,7 @@ ans = httpReq.text
 ##### Quelles techniques experimentales mesurent les interactions rapportées dans cette publication?
 
 ```
+Two hybrid array (double hybridation) : interaction entre prot solubles, physiques directes et eventuellement transitoires. 
 
 ```
 
@@ -113,18 +114,21 @@ print(f"Nombre total d'interactions {total}, EBV-EBV {len(EBV_EBV_mitab)}")
 
 ##### Que fait la fonction `mitabReader` ?
 ```
+Open datasets. Met en forme le resultat de la requête. 
 ```
 
 ##### Après avoir réparé ce code veuillez
 - Extraire les lignes MITAB impliquant uniquement des protéines d'EBV, quel est leur nombre ?
 - Extraire les lignes MITAB impliquant des protéines humaines et des protéines d'EBV, quel est leur nombre ?
 ```
+Nombre total d'interactions 230, EBV-EBV 59, Human_EBV 171.
+
 ```
 
 ##### Combien de protéines humaines et virales sont respectivement dans les jeux d'interactions EBV-Human et EBV-EBV ?
 
 ```
-
+Pas fait. Itérer, récupérer les identifier les protéine et faire une liste ou il n'y a pas de duplication. Une protéine peut avoir plusieurs interactions.
 ```
 
 ###### Pour la suite du travail assurez-vous d'avoir les deux jeux de données MITAB suivants
@@ -143,7 +147,7 @@ A l'aide des données MITAB et de la librarie [networkx](https://networkx.github
 
 - les arêtes relient deux protéines en interaction
 
-![Graphique](ebv_ebv_network_uniprot.png)
+![Graphique](/img/interactions_EBV-EBV.png)
 
 ##### Décrivez brièvement ce réseau
 
@@ -208,7 +212,7 @@ Vous pouvez desormais dessiner le réseau dans lequel:
 - les arêtes relient deux protéines en interaction
 - les noeuds sont les noms des gènes correspondant aux protéines.
 
-![Graphique](ebv_ebv_network_gene.png)
+![Graphique](/img/ebv_ebv_network_gene.png)
 
 ### Caractérisation des cibles protéiques du virus
 
